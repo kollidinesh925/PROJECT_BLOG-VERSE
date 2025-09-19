@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="" >
       <NavBar/>
-      {/*<SignUp/>*/}
+      <SignUp/>
       <SignIn/>
     </div>
   )
