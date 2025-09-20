@@ -1,5 +1,7 @@
 import React from 'react'
-const SignUp = () => {
+import SignUp from './SignUp'
+import { Link } from 'react-router-dom'
+const SignIn = () => {
     return (
         <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col">
             <h className="flex items-center justify-between px-8 py-4 shadow-sm bg-white">
@@ -39,9 +41,7 @@ const SignUp = () => {
                             type="submit"
                             className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold py-2 rounded-lg hover:from-blue-600 hover:to-blue-800 transition"> Sign In</button>
                     </form>
-                    <p className="text-center text-gray-600 mt-6">
-                        Don't have an account?{" "}
-                        <a href="" className="text-blue-600 font-medium hover:underline"> Create one here </a>
+                    <p className="text-center text-gray-600 mt-6">Don't have an account?{" "}<Link to="/SignUp" href="" className="text-blue-600 font-medium hover:underline"> Create one here </Link>
                     </p>
                 </div>
             </from>
