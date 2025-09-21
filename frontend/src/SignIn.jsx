@@ -1,21 +1,12 @@
 import React from 'react'
 import SignUp from './SignUp'
 import { Link } from 'react-router-dom'
+import NavBar from './NavBar'
 const SignIn = () => {
     return (
         <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col">
-            <h className="flex items-center justify-between px-8 py-4 shadow-sm bg-white">
-                <div className="flex items-center space-x-2">
-                    <span className="text-xl font-bold text-gray-800">BlogVerse</span>
-                </div>
-                <div className="flex items-center space-x-6">
-                    <a href="" className="text-gray-600 hover:text-gray-800">Home</a>
-                    <a href="" className="text-gray-600 hover:text-gray-800">Sign In</a>
-                    <a className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Sign Up</a>
-                </div>
-            </h>
-
-            <from className="flex flex-1 items-center justify-center p-4">
+            <NavBar/>
+            <from className="flex flex-1 items-center justify-center w-[90%] p-4">
                 <div className="bg-white shadow-xl rounded-2xl w-full max-w-md p-8">
                     <p className="text-2xl font-bold text-center mb-2">Sign In</p>
                     <p className="text-center text-gray-500 mb-6">Access your account</p>

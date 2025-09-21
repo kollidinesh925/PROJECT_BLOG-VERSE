@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import NavBar from './NavBar'
 import { Link } from 'react-router-dom'
 import { CircleUser } from 'lucide-react'
@@ -29,21 +29,21 @@ const SignUp = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         let newErrors = {}
-        if (formData.FullName) {
+        if (!formData.FullName) {
             newErrors.FullName = "Enter Your Full Name"
         }
-        if (formData.Email) {
+        if (!formData.Email) {
             newErrors.Email = "Enter Your Email"
         }
-        if (formData.Password) {
+        if (!formData.Password) {
             newErrors.Password = "Enter Your Password"
         }
-        if (formData.ConfirmPassword) {
+        if (!formData.ConfirmPassword) {
             newErrors.ConfirmPassword = "Enter Your ConfirmPassword"
         } else if (formData.Password != formData.ConfirmPassword) {
             newErrors.ConfirmPassword = "Your Password Don't Match"
         }
-        if (Object.keys(newErrors).length) {
+        if (Object.keys(newErrors).length>0) {
             setErrors(newErrors)
         } else {
             setSuccess("Your Account Has Been Created Successfully")
@@ -93,14 +93,14 @@ const SignUp = () => {
     return (
         <div className="flex items-center flex-col gap-5">
             <NavBar />
-            <h1 className="text-5xl text-blue-600 font-bold">Join BlogVerse</h1>
-            <p className="text-xl text-gray-600 text-center font-semibold">Create your account and <br></br>start your Blogging journey today</p>
-            <form onSubmit={handleSubmit} className=" flex flex-col border-1 border-gray-400 w-1/3 py-5 items-center gap-5 rounded-xl">
+            <h1 className="md:text-5xl text-blue-600 font-bold">Join BlogVerse</h1>
+            <p className="md:text-xl text-gray-600 text-center font-semibold">Create your account and <br></br>start your Blogging journey today</p>
+            <form onSubmit={handleSubmit} className=" flex flex-col border-1 border-gray-400 w-[90%] lg:w-1/3 py-5 items-center gap-5 rounded-xl">
                 <div className="w-[90%]  flex flex-col gap-2">
                     <p className="text-md text-gray-700 font-semibold">Full Name</p>
                     <div className='relative'>
                         <input value={formData.FullName} onChange={handlechange} name="FullName" type="text" placeholder="Enter your Full Name" className="border-1 border-gray-700 w-full items-center py-2 px-10 rounded-xl focus:outline-none focus:border-purple-500" />
-                        {errors.FullName && <p>{errors.FullName}</p>}
+                        {errors.FullName && <p className='text-red-500'>{errors.FullName}</p>}
                         <BookUser className='text-gray-400 absolute left-2 top-2' />
                     </div>
                 </div>
@@ -116,7 +116,7 @@ const SignUp = () => {
                     <p className="text-md text-gray-700 font-semibold">Password</p>
                     <div className='relative'>
                         <input value={formData.Password} onChange={handlechange} name="Password" type={ShowPassword ? "text" : "password"} placeholder="Enter your password" className="border-1 border-gray-700 w-full items-center py-2 px-10 rounded-xl focus:outline-none focus:border-purple-500" />
-                        {errors.Password && <P className="text-red-500">{errors.Password}</P>}
+                        {errors.Password && <p className="text-red-500">{errors.Password}</p>}
                         <p onClick={handlePassword}>{ShowPassword ? <EyeOff className='text-gray-400 absolute right-2 top-2' /> : <Eye className='text-gray-400 absolute right-2 top-2' />}</p>
                         <KeyRound className='text-gray-400 absolute left-2 top-2' />
                     </div >
