@@ -16,12 +16,14 @@ const SignUp = () => {
         ConfirmPassword: ""
 
     })
-    const [errors,setErrors] = useState({
+    const [isLoading, setIsLoading] = useState(false)
+    const [errors, setErrors] = useState({
         FullName: "",
         Email: "",
         Password: "",
         ConfirmPassword: ""
     })
+    const [isModalOpen, setIsOpenModal] = useState(false)
     const [ShowPassword, setShowPassword] = useState(false)
     const [ShowConfirmPassword, setShowConfirmPassword] = useState(false)
     const [error, setError] = useState('')
@@ -43,16 +45,25 @@ const SignUp = () => {
         } else if (formData.Password != formData.ConfirmPassword) {
             newErrors.ConfirmPassword = "Your Password Don't Match"
         }
-        if (Object.keys(newErrors).length>0) {
+        if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors)
+            
         } else {
-            setSuccess("Your Account Has Been Created Successfully")
+            setIsLoading(true)
+            setTimeout(()=>{
+                setIsLoading(false)
+                   setSuccess("Your Account Has Been Created Successfully")
             setformData({
                 FullName: "",
                 Email: "",
                 Password: "",
                 ConfirmPassword: ""
             })
+            setIsOpenModal(true)
+            setIsLoading(false)
+
+            },3000)
+         
         }
 
         // if (!formData.FullName || !formData.Email || !formData.Password || !formData.ConfirmPassword) {
@@ -85,7 +96,7 @@ const SignUp = () => {
             ...formData,
             [event.target.name]: event.target.value
         }))
-          setErrors((errors) => ({
+        setErrors((errors) => ({
             ...errors,
             [event.target.name]: ""
         }))
@@ -136,11 +147,22 @@ const SignUp = () => {
                 </div>
                 {error && <p className='text-red-500'>{error}</p>}
                 {success && <p className='text-green-600'>{success}</p>}
-                <button type="submit" className="w-[90%] bg-purple-500 p-3 text-white font-semibold rounded-2xl cursor-pointer flex gap-33"><CircleUser />Create Account</button>
+                <button type="submit" className="w-[90%] bg-purple-500 p-3 text-white font-semibold rounded-2xl cursor-pointer flex gap-33"><CircleUser />{isLoading ? "Creating... ":"Create Account"}</button>
                 <div className="border-[0.5px] border-gray-400 w-[90%] mt-4"></div>
                 <p className="text-gray-700 font-semibold">Aldready have an Account?<Link to="/SignIn" className="text-purple-500 font-semibold">Sign In Here</Link></p>
                 <Link to="/" className="text-gray-700 font-semibold py-3 w-[90%] rounded-xl cursor-pointer text-center hover:bg-gray-200">Back to Home</Link>
             </form>
+            {isModalOpen && <div className='fixed h-dvh w-dvw flex justify-center items-center border-2 border-red-500 '>
+                <div className='absolute h-dvh w-dvw bg-black opacity-50'></div>
+                <div className='p-6 border-1  border-gray-500 rounded-lg bg-white z-10'>
+                    <p className='text-xl font-bold'>HELLO DINESH</p>
+                    <p className='md-4'>You have created Successfully ✔</p>
+                    <div className='flex gap-10'>
+                        <Link to="/Login" className='px-4 py-2 rounded-2xl bg-blue-500 text-white '>SingIn</Link>
+                        <button onClick={()=>setIsOpenModal(false)} className='px-4 py-2 rounded-xl bg-gray-200'>Close</button>
+                    </div>
+                </div>
+            </div>}
         </div>
     )
 }
